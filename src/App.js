@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 
 import Timer from './components/timer/Timer';
+import ZenScribe from './components/zenScribe/ZenScribe';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       </header> */}
 
       <Timer />
+      <ZenScribe />
     </div>
   );
 }

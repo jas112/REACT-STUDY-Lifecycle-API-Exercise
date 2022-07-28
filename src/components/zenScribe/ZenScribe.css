@@ -1,0 +1,63 @@
+@keyframes loaderA {
+    0%{box-shadow: 0px 0px 12px #ff4500; width:40px; height: 40px;}
+    50%{box-shadow: 0px 0px 18px #ff4500; width:30px; height: 30px;}
+    100%{box-shadow: 0px 0px 12px #ff4500; width:40px; height: 40px;}
+}
+
+@keyframes loaderB {
+    0%{box-shadow: 0px 0px 12px #ff4500; width:15px; height: 15px; border: none;}
+    50%{box-shadow: 0px 0px 18px #ff4500; width: 20px; height: 20px; border: 2px solid #ff4500; background-color: #ff450090;}
+    100%{box-shadow: 0px 0px 12px #ff4500; width:15px; height: 15px; border: none;}
+}
+
+.ZenScribe-Quote{
+    width:450px;
+    height: 80px;
+    border-radius: 9px;
+    box-shadow: 3px 3px 6px #00000050;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: #000000;
+    color: #ff4500;
+    font-size: 20px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ff4500;
+    text-shadow: 0px 0px 18px #ff4500;
+}
+
+.ZenScribe-Title{
+    text-shadow: 0px 0px 8px #ff450090;
+}
+
+.ZenScribe-Loader{
+    width:40px;
+    height: 40px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 12px #ff4500;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: transparent;
+    border: 3px solid #ff4500;
+    animation: loaderA 1s ease-out infinite;
+}
+
+.ZenScribe-LoaderB{
+    width:15px;
+    height: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 12px #ff4500;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    /* border: 1px solid #ff4500; */
+    animation: loaderB 1s ease-out infinite;
+}

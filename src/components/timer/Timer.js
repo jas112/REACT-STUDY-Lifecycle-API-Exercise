@@ -20,7 +20,17 @@ class Timer extends Component {
     console.log('@Timer-Render() Render initiated...');
 
     let hours = this.state.time.getHours().toString();
+
+    if (hours.length < 2) {
+      hours = `0${hours}`; 
+    }
+
     let minutes = this.state.time.getMinutes().toString();
+
+    if (minutes.length < 2) {
+      minutes = `0${minutes}`; 
+    }
+
     let seconds = this.state.time.getSeconds().toString();
 
     if (seconds.length < 2) {
@@ -30,9 +40,10 @@ class Timer extends Component {
     let fullTime = `${hours}:${minutes}:${seconds}`;
     return (
       <div className='Timer'>
-        <h1>Timer</h1>
-        <h2>{this.state.time.getSeconds()}</h2>
-        <h2>{fullTime}</h2>
+        <h1 className='Timer-Title'>Timer</h1>
+        <div className='Timer-Display'>
+          <h2 className='Timer-Time'>{fullTime}</h2>
+        </div>
       </div>
     )
   }
