@@ -2,6 +2,7 @@
 
 import Timer from './components/timer/Timer';
 import ZenScribe from './components/zenScribe/ZenScribe';
+import GithubUserInfo from './components/githubUserInfo/GithubUserInfo';
 import './App.css';
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
 
       <Timer />
       <ZenScribe />
+      <GithubUserInfo username='facebook'/>
+      <GithubUserInfo username='google'/>
+      <GithubUserInfo username='microsoft'/>
+      <GithubUserInfo username='jas112'/>
     </div>
   );
 }

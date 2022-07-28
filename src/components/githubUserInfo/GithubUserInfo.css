@@ -1,0 +1,129 @@
+@keyframes gloaderA {
+    0%{box-shadow: 0px 0px 12px #0072d0; width:40px; height: 40px;}
+    50%{box-shadow: 0px 0px 18px #0072d0; width:30px; height: 30px;}
+    100%{box-shadow: 0px 0px 12px #0072d0; width:40px; height: 40px;}
+}
+
+@keyframes gloaderB {
+    0%{box-shadow: 0px 0px 12px #0072d0; width:15px; height: 15px; border: none;}
+    50%{box-shadow: 0px 0px 18px #0072d0; width: 20px; height: 20px; border: 2px solid #0072d0; background-color: #0072d090;}
+    100%{box-shadow: 0px 0px 12px #0072d0; width:15px; height: 15px; border: none;}
+}
+
+.GithubUserInfo-Display{
+    width:450px;
+    height: 300px;
+    border-radius: 9px;
+    box-shadow: 3px 3px 6px #00000050;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: #060606;
+    color: #0072d0;
+    font-size: 20px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #0072d0;
+    text-shadow: 0px 0px 18px #0072d0;
+}
+
+.GithubUserInfo-Display-Details{
+    width:90%;
+    height: 85%;
+    border-radius: 9px;
+    border: 2px solid #0072d0;
+    box-shadow: 3px 3px 6px #0072d050;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: #000000;
+    color: #0072d0;
+    font-size: 20px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #0072d0;
+    text-shadow: 0px 0px 18px #0072d0;
+}
+
+.GithubUserInfo-Display-Details-Panel{
+    width:46%;
+    height: 90%;
+    border-radius: 9px;
+    box-shadow: 3px 3px 6px #00000050;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px auto;
+    background-color: #000000;
+    color: #0072d0;
+    font-size: 20px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #0072d0;
+    text-shadow: 0px 0px 18px #0072d0;
+}
+
+.GithubUserInfo-User-Avatar{
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.GithubUserInfo-User-Avatar-Img{
+    width: auto;
+    height: 100%;
+}
+
+.GithubUserInfo-User-Nfo{
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.GithubUserInfo-User-Nfo-Points{
+    font-size:12px;
+    text-align: left;
+}
+
+.GithubUserInfo-User-Nfo-Points-User{
+    font-size:24px;
+}
+
+.GithubUserInfo-Title{
+    text-shadow: 0px 0px 8px #0072d090;
+}
+
+.GithubUserInfo-Loader{
+    width:40px;
+    height: 40px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 12px #0072d0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: transparent;
+    border: 3px solid #0072d0;
+    animation: gloaderA 1s ease-out infinite;
+}
+
+.GithubUserInfo-LoaderB{
+    width:15px;
+    height: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 12px #0072d0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    /* border: 1px solid #ff4500; */
+    animation: gloaderB 1s ease-out infinite;
+}
