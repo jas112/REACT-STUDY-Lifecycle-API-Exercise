@@ -6,7 +6,7 @@ class Card extends Component {
     let altValue = `${this.props.cardValue} of ${this.props.cardSuit}`;
     return (
       <div className='Card'>
-        <img src={this.props.imageUrl} alt={altValue} />
+        <img style={{transform: this.props.cardTransform}} src={this.props.imageUrl} alt={altValue} />
       </div>
     )
   }

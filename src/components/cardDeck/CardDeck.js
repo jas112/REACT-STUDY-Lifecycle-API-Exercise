@@ -30,7 +30,7 @@ class CardDeck extends Component {
     generateCurrentDeck(){
 
         let deck = this.state.cards.map(card => (
-            <Card key={card.code} imageUrl={card.image} cardValue={card.value} cardSuit={card.suit} />
+            <Card key={card.code} imageUrl={card.image} cardValue={card.value} cardSuit={card.suit} cardTransform={card.cardTransform} />
         ));
 
         return deck;
@@ -51,6 +51,11 @@ class CardDeck extends Component {
             if (refreshedDeck.success) {
                 let remainingDelta = this.state.remaining - 1;
                 let cardsDrawnDelta = this.state.cardsDrawn + 1;
+                let rotationAngle = Math.random() * 90 - 45;
+                let xPosition = Math.random() * 40 - 20;
+                let yPosition = Math.random() * 40 - 20;
+                let cardTransform = `translate(${xPosition}px, ${yPosition}px) rotate(${rotationAngle}deg)`;
+                refreshedDeck.cards[0]['cardTransform'] = cardTransform;
                 let cardsDelta = [...this.state.cards, ...refreshedDeck.cards];
                 this.setState({isSuccess: refreshedDeck.success, cards: cardsDelta, remaining: refreshedDeck.remaining, cardsDrawn: cardsDrawnDelta});
             } else {
@@ -79,11 +84,12 @@ class CardDeck extends Component {
 
     return (
       <div className='CardDeck'>
+        <div className='CardDeck-Markee'>CARD DRAW</div>
         <div className='CardDeck-Console'>
-            <div>{deckStatus}</div>
-            <button onClick={this.drawCard} disabled={this.state.outOfCards}>{this.state.outOfCards ? 'Out of Cards!!!' : 'Draw A New Card!!!'}</button>
+            <div className='CardDeck-Status'>{deckStatus}</div>
+            <button className={this.state.outOfCards ? 'CardDeck-Btn CardDeck-Btn-Inactive' : 'CardDeck-Btn CardDeck-Btn-Active'} onClick={this.drawCard} disabled={this.state.outOfCards}>{this.state.outOfCards ? 'Out of Cards!!!' : 'Draw A New Card!!!'}</button>
         </div>
-        <div className='CardDeck-Display'>
+        <div className={this.state.outOfCards ? 'CardDeck-Display CardDeck-Display-Inactive' : 'CardDeck-Display CardDeck-Display-Active'}>
             {cardDeck}
         </div>
       </div>

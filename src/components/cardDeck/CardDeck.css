@@ -1,7 +1,105 @@
-.CardDeck{
+@keyframes markee {
+    0%{text-shadow: 0px 0px 5px #b700ff;}
+    50%{text-shadow: 0px 0px 19px #d15dff;}
+    100%{text-shadow: 0px 0px 5px #b700ff;}
+}
 
+@keyframes activeBtn {
+    0%{box-shadow: 0px 0px 5px green; text-shadow: 0px 0px 8px green;}
+    50%{box-shadow: 0px 0px 10px green; text-shadow: 0px 0px 20px green;}
+    100%{box-shadow: 0px 0px 5px green; text-shadow: 0px 0px 8px green;}
+}
+
+@keyframes activeBtnHover {
+    0%{box-shadow: 0px 0px 5px #ab0ce4; text-shadow: 0px 0px 8px #ab0ce4;}
+    50%{box-shadow: 0px 0px 10px #ab0ce4; text-shadow: 0px 0px 20px #ab0ce4;}
+    100%{box-shadow: 0px 0px 5px #ab0ce4; text-shadow: 0px 0px 8px #ab0ce4;}
+}
+
+@keyframes inActiveBtnHover {
+    0%{box-shadow: 0px 0px 5px red; text-shadow: 0px 0px 8px red;}
+    50%{box-shadow: 0px 0px 10px red; text-shadow: 0px 0px 20px red;}
+    100%{box-shadow: 0px 0px 5px red; text-shadow: 0px 0px 8px red;}
+}
+
+.CardDeck{
+    padding: 30px 0px;
+}
+
+.CardDeck-Markee{
+    color: #b700ff;
+    font-size: 3.5em;
+    font-weight: 800;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px;
+    text-shadow: 0px 0px 19px #b700ff;
+    padding: 0px;
+    animation: markee 3s ease-out infinite;
+}
+
+.CardDeck-Console{
+    color: #ffffff;
+    padding: 5px 0px 25px 0px;
+}
+
+.CardDeck-Status{
+    color: #b700ff;
+    font-size: 24px;
+    padding: 30px 0px;
+}
+
+.CardDeck-Btn{
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.CardDeck-Btn-Active{
+    border: 3px solid green;
+    color: green;
+    box-shadow: 0px 0px 9px green;
+    text-shadow: 0px 0px 15px green;
+    animation: activeBtn 3s ease-out infinite;
+    transition: 1.5s;
+}
+
+.CardDeck-Btn-Active:hover{
+    border: 3px solid #ab0ce4;
+    color: #ab0ce4;
+    box-shadow: 0px 0px 9px #ab0ce4;
+    text-shadow: 0px 0px 15px #ab0ce4;
+    animation: activeBtnHover 3s ease-out infinite;
+    transition: 1.5s;
+}
+
+.CardDeck-Btn-Inactive{
+    border: 3px solid red;
+    color: red;
+    box-shadow: 0px 0px 9px red;
+    animation: inActiveBtn 3s ease-out infinite;
+    transition: 1.5s;
+    cursor: none;
 }
 
 .CardDeck-Display{
+    padding-top: 25px;
+    width:500px;
+    height: 500px;
+    border-radius: 500px;
+    margin: 0px auto;
+}
 
+.CardDeck-Display-Active{
+    background-color: #00800070;
+    border: 9px solid green;
+    box-shadow: 0px 0px 29px green;
+}
+
+.CardDeck-Display-Inactive{
+    background-color: #ff000070;
+    border: 9px solid red;
+    box-shadow: 0px 0px 29px red;
 }
