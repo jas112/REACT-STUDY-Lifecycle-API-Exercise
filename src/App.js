@@ -3,6 +3,7 @@
 import Timer from './components/timer/Timer';
 import ZenScribe from './components/zenScribe/ZenScribe';
 import GithubUserInfo from './components/githubUserInfo/GithubUserInfo';
+import CardDeck from './components/cardDeck/CardDeck';
 import './App.css';
 
 function App() {
@@ -23,12 +24,14 @@ function App() {
         </a>
       </header> */}
 
-      <Timer />
+      {/* <Timer />
       <ZenScribe />
       <GithubUserInfo username='facebook'/>
       <GithubUserInfo username='google'/>
       <GithubUserInfo username='microsoft'/>
-      <GithubUserInfo username='jas112'/>
+      <GithubUserInfo username='jas112'/> */}
+
+      <CardDeck />
     </div>
   );
 }
