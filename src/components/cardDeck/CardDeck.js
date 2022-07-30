@@ -18,6 +18,7 @@ class CardDeck extends Component {
             outOfCards: true
         };
         this.drawCard = this.drawCard.bind(this);
+        this.resetDeck = this.resetDeck.bind(this);
     }
 
     async componentDidMount(){
@@ -34,6 +35,14 @@ class CardDeck extends Component {
         ));
 
         return deck;
+    }
+
+    async resetDeck(){
+        
+        let res = await axios.get(`${API_BASE_URL}new/shuffle/`);
+        let resetDeck = res.data;
+        this.setState({isSuccess: resetDeck.success, deck_id: resetDeck.deck_id,cards: [], remaining: resetDeck.remaining, shuffled: resetDeck.shuffled,cardsDrawn: 0, outOfCards: false});
+
     }
 
     async drawCard(){
@@ -76,11 +85,28 @@ class CardDeck extends Component {
 
     }
 
+    // determineCardDeckDisplayState(){
+        
+    //     let isOutOfCards = this.state.outOfCards;
+    //     let cardsDrawn = this.state.cardsDrawn;
+    //     let areCardsDrawn = cardsDrawn > 0;
+    //     let cardDeckDisplayState;
+
+    //     if(areCardsDrawn && !isOutOfCards){
+    //         cardDeckDisplayState = 'CardDeck-Display CardDeck-Display-Active';
+    //     }else{
+    //         cardDeckDisplayState = 'CardDeck-Display';
+    //     }
+
+    //     return cardDeckDisplayState;
+
+    // }
+
   render() {
 
     let cardDeck = this.generateCurrentDeck();
 
-    let deckStatus = `${this.state.cardsDrawn} drawn | ${this.state.remaining} remaining`;
+    let deckStatus = `deck => ${this.state.deck_id} | ${this.state.cardsDrawn} drawn | ${this.state.remaining} remaining | outofCards: ${this.state.outOfCards}`;
 
     return (
       <div className='CardDeck'>
@@ -91,6 +117,10 @@ class CardDeck extends Component {
         </div>
         <div className={this.state.outOfCards ? 'CardDeck-Display CardDeck-Display-Inactive' : 'CardDeck-Display CardDeck-Display-Active'}>
             {cardDeck}
+        </div>
+        <div className='CardDeck-Console'>
+            <br/>
+            {this.state.outOfCards ? <button className='CardDeck-Btn CardDeck-Btn-Active' onClick={this.resetDeck}>RESET DECK</button> : ''}
         </div>
       </div>
     )
