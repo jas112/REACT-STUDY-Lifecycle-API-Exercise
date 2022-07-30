@@ -106,7 +106,7 @@ class CardDeck extends Component {
 
     let cardDeck = this.generateCurrentDeck();
 
-    let deckStatus = `deck => ${this.state.deck_id} | ${this.state.cardsDrawn} drawn | ${this.state.remaining} remaining | outofCards: ${this.state.outOfCards}`;
+    let deckStatus = `deck => ${this.state.deck_id} | ${this.state.cardsDrawn} drawn | ${this.state.remaining} remaining | outOfCards: ${this.state.outOfCards}`;
 
     return (
       <div className='CardDeck'>

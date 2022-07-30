@@ -4,6 +4,7 @@ import Timer from './components/timer/Timer';
 import ZenScribe from './components/zenScribe/ZenScribe';
 import GithubUserInfo from './components/githubUserInfo/GithubUserInfo';
 import CardDeck from './components/cardDeck/CardDeck';
+import JokeList from './components/jokeList/JokeList';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <GithubUserInfo username='jas112'/> */}
 
       <CardDeck />
+      <JokeList />
     </div>
   );
 }
