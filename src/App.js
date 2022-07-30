@@ -32,7 +32,7 @@ function App() {
       <GithubUserInfo username='microsoft'/>
       <GithubUserInfo username='jas112'/> */}
 
-      <CardDeck />
+      {/* <CardDeck /> */}
       <JokeList />
     </div>
   );

@@ -14,6 +14,9 @@ class JokeList extends Component {
         this.state = {
             jokes: []
         };
+
+        this.generateUpVote = this.generateUpVote.bind(this);
+        this.generateDownVote = this.generateDownVote.bind(this);
     }
 
     async componentDidMount(){
@@ -46,9 +49,39 @@ class JokeList extends Component {
         console.log(`joke => ${JSON.stringify(initialJokes)}`);
         console.log(`initialJokes.length => ${initialJokes.length}`);
     }
+
+    generateJokes(){
+        let jokes = this.state.jokes.map(j => (
+            <Joke key={j.id} joke={j.joke} upVotes={j.upVotes} downVotes={j.downVotes} idx={this.state.jokes.indexOf(j)} />
+        ));
+    }
+
+    generateUpVote(idx){
+        let newJokes = [...this.state.jokes];
+        newJokes[idx].upVotes =+ 1;
+        this.setState({jokes: newJokes});
+    }
+
+    generateDownVote(idx){
+        let newJokes = [...this.state.jokes];
+        newJokes[idx].downVotes =+ 1;
+        this.setState({jokes: newJokes});
+    }
+
   render() {
+
+    let currentJokes = this.generateJokes(); 
+
     return (
-      <div>JokeList</div>
+      <div className='JokeList'>
+        <div className='JokeList-Console'>
+            <div className='Jokelist-Markee'></div>
+            <div className='JokeList-Control'></div>
+        </div>
+        <div className='JokeList-Display'>
+            {currentJokes}
+        </div>
+    </div>
     )
   }
 }
