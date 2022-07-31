@@ -45,6 +45,7 @@ class JokeList extends Component {
             joke['upVotes'] = 0;
             joke['downVotes'] = 0;
             joke['voteTotal'] = 0;
+            joke['voteTotalStyle'] = `Joke-Vote-Total`;
             joke['isCurrent'] = false;
 
             // console.log(`joke => ${JSON.stringify(joke)}`);
@@ -69,7 +70,19 @@ class JokeList extends Component {
 
     generateJokes(){
         let jokes = this.state.jokes.sort((a,b) => Number(b.voteTotal) - Number(a.voteTotal)).map(j => (
-            <Joke key={j.id} jokeObject={j} joke={j.joke} upVotes={j.upVotes} downVotes={j.downVotes} voteTotal={j.voteTotal} idx={this.state.jokes.indexOf(j)} generateUpVote={this.generateUpVote} generateDownVote={this.generateDownVote} isCurrent={j.isCurrent} setCurrentJoke={this.setCurrentJoke} />
+            <Joke 
+                key={j.id} 
+                jokeObject={j} 
+                joke={j.joke} 
+                upVotes={j.upVotes} 
+                downVotes={j.downVotes} 
+                voteTotal={j.voteTotal} 
+                voteTotalStyle={j.voteTotalStyle}
+                idx={this.state.jokes.indexOf(j)} 
+                generateUpVote={this.generateUpVote} 
+                generateDownVote={this.generateDownVote} 
+                isCurrent={j.isCurrent} 
+                setCurrentJoke={this.setCurrentJoke} />
         ));
 
         return jokes;
@@ -81,6 +94,7 @@ class JokeList extends Component {
         console.log(`Pre @generateUpVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
         newJokes[idx].upVotes += 1;
         newJokes[idx].voteTotal += 1;
+        newJokes[idx].voteTotalStyle = this.evaluateVoteTotalColor(newJokes[idx].voteTotal);
         console.log(`Post @generateUpVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
         this.setState({jokes: newJokes});
     }
@@ -91,6 +105,7 @@ class JokeList extends Component {
         console.log(`Pre @generateDownVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
         newJokes[idx].downVotes += 1;
         newJokes[idx].voteTotal -= 1;
+        newJokes[idx].voteTotalStyle = this.evaluateVoteTotalColor(newJokes[idx].voteTotal);
         console.log(`Post @generateDownVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
         this.setState({jokes: newJokes});
     }
@@ -125,6 +140,27 @@ class JokeList extends Component {
         // console.log(`Post @setCurrentJoke newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
 
         this.setState({currJoke: joke});
+    }
+
+    evaluateVoteTotalColor(voteTotal){
+        let voteTotalStyle;
+        let isNegative = voteTotal < 0;
+        let isPositive = voteTotal >= 1;
+        let isBalanced = voteTotal === 0;
+
+        if(isNegative){
+            voteTotalStyle = `Joke-Vote-Total Joke-Vote-Total-Negative`;
+        }
+
+        if(isPositive){
+            voteTotalStyle = `Joke-Vote-Total Joke-Vote-Total-Positive`;
+        }
+
+        if(isBalanced){
+            voteTotalStyle = `Joke-Vote-Total`;
+        }
+
+        return voteTotalStyle;
     }
 
   render() {

@@ -7,6 +7,7 @@
     /* border: 1px solid white; */
     color: white;
     border-bottom: 1px solid #020202;
+    cursor: pointer;
     transition: 1.5s;
 }
 
@@ -56,8 +57,6 @@
     box-shadow: 0px 0px 6px #00ff08;
 }
 
-
-
 .Joke-Vote-Btn-Down{
     border: 2px solid #f61515;
     color: #f61515;
@@ -69,15 +68,27 @@
     height: 30px;
     border-radius: 30px;
     background-color: transparent;
-    /* border: 2px solid white; */
+    border: 2px solid white;
     color: white;
     font-size: 12px;
     font-weight: 500;
-    /* box-shadow: 0px 0px 6px white; */
+    box-shadow: 0px 0px 6px white;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
+}
+
+.Joke-Vote-Total-Positive{
+    border: 2px solid #00ff08;
+    color: #00ff08;
+    box-shadow: 0px 0px 6px #00ff08;
+}
+
+.Joke-Vote-Total-Negative{
+    border: 2px solid #f61515;
+    color: #f61515;
+    box-shadow: 0px 0px 6px #f61515;
 }
 
 .Joke-Content{
@@ -90,6 +101,10 @@
 .Joke-Vote-Expression{
     width: 20%;
     height: 70px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
     /* border: 1px solid green; */
 }
 
@@ -97,4 +112,14 @@
     background-color: #0e0e0e;
     border: 1px solid #0073ff;
     box-shadow: 0px 0px 9px #0073ff;
+}
+
+.Joke-Vote-Expression-Emoji{
+    font-size: 40px;
+    transition: 1s;
+}
+
+.Joke-Vote-Expression-Emoji:hover{
+    font-size: 50px;
+    transition: 1s;
 }
