@@ -1,0 +1,100 @@
+.Joke{
+    width: 480px;
+    height:70px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    /* border: 1px solid white; */
+    color: white;
+    border-bottom: 1px solid #020202;
+    transition: 1.5s;
+}
+
+.Joke:hover{
+    background-color: #020202;
+    transition: 1.5s;
+}
+
+.Joke-Console{
+    width:30%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.Joke-Console-Btn{
+    
+}
+
+.Joke-UpVote{
+    
+}
+
+.Joke-DownVote{
+    
+}
+
+.Joke-Vote-Btn{
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    background-color: transparent;
+    /* border: 2px solid white; */
+    color: white;
+    font-weight: 800;
+    box-shadow: 0px 0px 6px white;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.Joke-Vote-Btn-Up{
+    /* border: 2px solid #00ff08; */
+    color: #00ff08;
+    box-shadow: 0px 0px 6px #00ff08;
+}
+
+
+
+.Joke-Vote-Btn-Down{
+    border: 2px solid #f61515;
+    color: #f61515;
+    box-shadow: 0px 0px 6px #f61515;
+}
+
+.Joke-Vote-Total{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: transparent;
+    /* border: 2px solid white; */
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    /* box-shadow: 0px 0px 6px white; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.Joke-Content{
+    width: 75%;
+    text-align: left;
+    font-size: 12px;
+    padding: 0px 3px;
+}
+
+.Joke-Vote-Expression{
+    width: 20%;
+    height: 70px;
+    /* border: 1px solid green; */
+}
+
+.Joke-isCurrent{
+    background-color: #0e0e0e;
+    border: 1px solid #0073ff;
+    box-shadow: 0px 0px 9px #0073ff;
+}
