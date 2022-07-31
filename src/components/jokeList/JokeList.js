@@ -178,7 +178,7 @@ class JokeList extends Component {
                     <button className='JokeList-Control-Btn' onClick={this.addMoreJokes}>Add Jokes</button>
                 </div>
             </div>
-            <div className='JokeList-Display'>
+            <div className='JokeList-Display' id='JokeListDisplayPortal'>
                 {currentJokes}
             </div>
         </div>
