@@ -26,32 +26,32 @@ class Joke extends Component {
         let vTotal = this.props.voteTotal;
         let isBalanced = vTotal === 0;
         let isPositive = (vTotal > 0) && (vTotal < 5);
-        let isPositive10 = (vTotal > 5) && (vTotal < 10);
-        let isPositive15 = (vTotal > 10)
+        let isPositive10 = (vTotal >= 5) && (vTotal < 10);
+        let isPositive15 = (vTotal >= 10)
         let isNegative = (vTotal < 0) && (vTotal > -5);
-        let isNegative10 = (vTotal < -5) && (vTotal > -10);
-        let isNegative15 = (vTotal < -10)
+        let isNegative10 = (vTotal <= -5) && (vTotal > -10);
+        let isNegative15 = (vTotal <= -10)
 
         if(isBalanced){
             return (<div className='Joke-Vote-Expression-Emoji'>🙂</div>);
         }
         if(isPositive){
-            return (<div className='Joke-Vote-Expression-Emoji'>😀</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Positive Joke-Vote-Expression-PA'>😀</div>);
         }
         if(isPositive10){
-            return (<div className='Joke-Vote-Expression-Emoji'>😂</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Positive Joke-Vote-Expression-PB'>😂</div>);
         }
         if(isPositive15){
-            return (<div className='Joke-Vote-Expression-Emoji'>🤣</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Positive Joke-Vote-Expression-PC'>🤣</div>);
         }
         if(isNegative){
-            return (<div className='Joke-Vote-Expression-Emoji'>🙁</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Negative Joke-Vote-Expression-NA'>🙁</div>);
         }
         if(isNegative10){
-            return (<div className='Joke-Vote-Expression-Emoji'>😬</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Negative Joke-Vote-Expression-NB'>😬</div>);
         }
         if(isNegative15){
-            return (<div className='Joke-Vote-Expression-Emoji'>🤬</div>);
+            return (<div className='Joke-Vote-Expression-Emoji Joke-Vote-Expression-Emoji-Negative Joke-Vote-Expression-NC'>🤬</div>);
         }
 
     }
