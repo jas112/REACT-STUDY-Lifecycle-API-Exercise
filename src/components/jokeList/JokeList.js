@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import Joke from '../joke/Joke';
 import './JokeList.css';
 
@@ -12,35 +13,64 @@ class JokeList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            jokes: [],
-            currJoke: {},
+            jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]'),
+            currJoke: JSON.parse(window.localStorage.getItem('currJoke') || '{}'),
+            isLoading: false
         };
+        this.getJokes = this.getJokes.bind(this);
         this.addMoreJokes = this.addMoreJokes.bind(this);
         this.generateUpVote = this.generateUpVote.bind(this);
         this.generateDownVote = this.generateDownVote.bind(this);
         this.setCurrentJoke = this.setCurrentJoke.bind(this);
+        this.initJokeList = this.initJokeList.bind(this);
+        this.resetLocalStorageJokeValues = this.resetLocalStorageJokeValues.bind(this);
+        this.handleAddMoreJokes = this.handleAddMoreJokes.bind(this);
     }
 
     async componentDidMount(){
+        this.setState({isLoading: true},this.initJokeList);
+    }
 
-        let initialJokes = await this.getJokes();
+    async initJokeList(){
+        if(this.state.jokes.length === 0){
+            // this.handleAddMoreJokes();
+            this.setState({isLoading: true},async () => {
+                let newJokes = await this.getJokes();
+                this.setState({jokes: newJokes, currJoke: {}, isLoading: false});
+            });
+        }else{
+            this.setState({isLoading: true},this.resetLocalStorageJokeValues);
+        }
+    }
 
-        // console.log(`joke => ${JSON.stringify(initialJokes)}`);
-        console.log(`initialJokes.length => ${initialJokes.length}`);
-        this.setState({jokes: initialJokes})
+    resetLocalStorageJokeValues(){
+        let jokes;
+        let resetJokes;
+
+        jokes = [...this.state.jokes];
+        resetJokes = jokes.map(j => 
+                j.isCurrent === true ? {...j, isCurrent: false} : j
+            );
+
+        this.setState({jokes: resetJokes, currJoke: {}, isLoading: false}, () => {
+            window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes));
+            window.localStorage.setItem('currJoke', JSON.stringify(this.state.currJoke));
+        });
     }
 
     async getJokes(){
         let jokeBatch = [];
 
-        while (jokeBatch.length < 10) {
+        console.log(`@getJokes this.props.initialJokeCount => ${this.props.initialJokeCount}`);
+
+        while (jokeBatch.length < this.props.initialJokeCount) {
             
             let joke = {};
             
             let res = await axios.get(`${API_BASE_URL}`,{headers: {Accept: 'application/json'}});
             // console.log(`res.data => ${JSON.stringify(res.data)}`);
 
-            joke['id'] = res.data.id;
+            joke['id'] = uuidv4();
             joke['joke'] = res.data.joke;
             joke['upVotes'] = 0;
             joke['downVotes'] = 0;
@@ -56,6 +86,9 @@ class JokeList extends Component {
             if(!isIncluded){
                 jokeBatch.push(joke);
             }
+
+            console.log(`@getJokes jokeBatch length => ${jokeBatch.length}`);
+            console.log(`@getJokes jokeBatch => ${JSON.stringify(jokeBatch)}`);
             
         }
 
@@ -65,7 +98,11 @@ class JokeList extends Component {
     async addMoreJokes(){
         let additionalJokes = await this.getJokes();
         let newJokes = [...this.state.jokes, ...additionalJokes];
-        this.setState({jokes: newJokes});
+        this.setState({jokes: newJokes, isLoading: false},() => window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes)));
+    }
+
+    async handleAddMoreJokes(){
+        this.setState({isLoading: true},this.addMoreJokes);
     }
 
     generateJokes(){
@@ -96,7 +133,8 @@ class JokeList extends Component {
         newJokes[idx].voteTotal += 1;
         newJokes[idx].voteTotalStyle = this.evaluateVoteTotalColor(newJokes[idx].voteTotal);
         console.log(`Post @generateUpVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
-        this.setState({jokes: newJokes});
+        this.setState({jokes: newJokes}, () => window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes)));
+        
     }
 
     generateDownVote(idx){
@@ -107,7 +145,7 @@ class JokeList extends Component {
         newJokes[idx].voteTotal -= 1;
         newJokes[idx].voteTotalStyle = this.evaluateVoteTotalColor(newJokes[idx].voteTotal);
         console.log(`Post @generateDownVote newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
-        this.setState({jokes: newJokes});
+        this.setState({jokes: newJokes}, () => window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes)));
     }
 
     setCurrentJoke(joke){
@@ -139,7 +177,10 @@ class JokeList extends Component {
 
         // console.log(`Post @setCurrentJoke newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
 
-        this.setState({currJoke: joke});
+        this.setState({jokes: newJokes, currJoke: joke}, () => {
+            window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes));
+            window.localStorage.setItem('currJoke', JSON.stringify(this.state.currJoke));
+        });
     }
 
     evaluateVoteTotalColor(voteTotal){
@@ -163,23 +204,40 @@ class JokeList extends Component {
         return voteTotalStyle;
     }
 
+    clearLocalStorage(){
+        window.localStorage.clear();
+    }
+
+    generateLoader(){
+        return(
+            <div className='JokeList-Loader-Console'>
+                <div className='JokeList-Loader'>
+                    <div className='JokeList-LoaderB'></div>
+                </div>
+            </div>
+        );
+    }
+
   render() {
 
     let currentJokes = this.generateJokes(); 
+    let loader = this.generateLoader();
 
     return (
       <div className='JokeList'>
         <div className='JokeList-Container'>
             <div className='JokeList-Console'>
                 <div className='JokeList-Markee'>
+                    <div className='JokeList-Markee-Icon'>&#9786;</div>
                     <h1>Joke List</h1>
                 </div>
                 <div className='JokeList-Control'>
-                    <button className='JokeList-Control-Btn' onClick={this.addMoreJokes}>Add Jokes</button>
+                    <button className='JokeList-Control-Btn' onClick={this.handleAddMoreJokes}>Add Jokes</button>
+                    <button className='JokeList-Control-Btn-CLRWLS' onClick={this.clearLocalStorage}>Clear LocalStorage</button>
                 </div>
             </div>
             <div className='JokeList-Display' id='JokeListDisplayPortal'>
-                {currentJokes}
+                {this.state.isLoading ? loader : currentJokes}
             </div>
         </div>
         

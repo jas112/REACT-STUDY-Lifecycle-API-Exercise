@@ -10,12 +10,36 @@
     100%{box-shadow: 0px 0px 5px #ab0ce4; text-shadow: 0px 0px 8px #ab0ce4;}
 }
 
+
+@keyframes clearLocalStorageBtn {
+    0%{box-shadow: 0px 0px 5px #ffffff; text-shadow: 0px 0px 8px #ffffff;}
+    50%{box-shadow: 0px 0px 10px #ffffff; text-shadow: 0px 0px 20px #ffffff;}
+    100%{box-shadow: 0px 0px 5px #ffffff; text-shadow: 0px 0px 8px #ffffff;}
+}
+
+@keyframes addJokesBtnHover {
+    0%{box-shadow: 0px 0px 5px #ffff00; text-shadow: 0px 0px 8px #ffff00;}
+    50%{box-shadow: 0px 0px 10px #ffff00; text-shadow: 0px 0px 20px #ffff00;}
+    100%{box-shadow: 0px 0px 5px #ffff00; text-shadow: 0px 0px 8px #ffff00;}
+}
+
 @keyframes markeeJokes {
     0%{text-shadow: 0px 0px 5px #006fc9;}
     50%{text-shadow: 0px 0px 19px #006fc9;}
     100%{text-shadow: 0px 0px 5px #006fc9;}
 }
 
+@keyframes loaderA-JokeList {
+    0%{box-shadow: 0px 0px 12px #006fc9; width:60px; height: 60px;}
+    50%{box-shadow: 0px 0px 18px #006fc9; width:50px; height: 50px;}
+    100%{box-shadow: 0px 0px 12px #006fc9; width:60px; height: 60px;}
+}
+
+@keyframes loaderB-JokeList {
+    0%{box-shadow: 0px 0px 12px #006fc9; width:40px; height: 40px; border: none;}
+    50%{box-shadow: 0px 0px 18px #006fc9; width: 30px; height: 30px; border: 2px solid #006fc9; background-color: #006fc990;}
+    100%{box-shadow: 0px 0px 12px #006fc9; width:40px; height: 40px; border: none;}
+}
 
 .JokeList{
     width:100%;
@@ -41,7 +65,7 @@
 .JokeList-Console{
     background-color: #141414;
     width: 200px;
-    height: 600px;
+    height: 550px;
     border-radius: 0px;
     box-shadow: 2px 2px 6px #000000;
     display: flex;
@@ -66,15 +90,32 @@
     animation: markeeJokes 3s ease-out infinite;
 }
 
+.JokeList-Markee-Icon{
+    height: 190px;
+    font-size: 8.3em;
+    padding: 0px;
+}
+
 .JokeList-Display{
     background-color: #1d1d1d;
     width:500px;
     border-radius: 0px;
     box-shadow: 2px 2px 6px #000000;
     /* overflow-y: hidden; */
+    /* display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items:center; */
     overflow-y: scroll;
     height: 500px;
     box-shadow: 0px 0px 9px #006fc9;
+}
+
+.JokeList-Control{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 #JokeListDisplayPortal::-webkit-scrollbar-track
@@ -108,6 +149,20 @@
     transition: 1.5s;
 }
 
+.JokeList-Control-Btn-CLRWLS{
+    width: 100px;
+    height: 30px;
+    font-size: 9px;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    box-shadow: 0px 0px 9px #ffffff;
+    text-shadow: 0px 0px 15px #ffffff;
+    animation: clearLocalStorageBtn 3s ease-out infinite;
+    transition: 1.5s;
+}
+
 .JokeList-Control-Btn:hover{
     border: 3px solid #ab0ce4;
     color: #ab0ce4;
@@ -116,4 +171,68 @@
     text-shadow: 0px 0px 15px #ab0ce4;
     animation: addJokesBtnHover 3s ease-out infinite;
     transition: 1.5s;
+}
+
+.JokeList-Control-Btn-CLRWLS{
+    width: 100px;
+    height: 30px;
+    font-size: 9px;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    box-shadow: 0px 0px 9px #ffffff;
+    text-shadow: 0px 0px 15px #ffffff;
+    margin: 8px auto;
+    animation: clearLocalStorageBtn 3s ease-out infinite;
+    transition: 1.5s;
+}
+
+.JokeList-Control-Btn-CLRWLS:hover{
+    border: 3px solid #ffff00;
+    color: #ffff00;
+    box-shadow: 0px 0px 9px #ffff00;
+    /* box-shadow: inset 0px 0px 6px #ab0ce4; */
+    text-shadow: 0px 0px 15px #ffff00;
+    animation: addJokesBtnHover 3s ease-out infinite;
+    transition: 1.5s;
+}
+
+.JokeList-Loader-Console{
+    /* border: 1px solid white; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.JokeList-Loader{
+    width:60px;
+    height: 60px;
+    border-radius: 60px;
+    box-shadow: 0px 0px 12px #006fc9;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: transparent;
+    border: 3px solid #006fc9;
+    animation: loaderA-JokeList 1s ease-out infinite;
+}
+
+.JokeList-LoaderB{
+    width:40px;
+    height: 40px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 12px #006fc9;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    /* border: 1px solid #ff4500; */
+    animation: loaderB-JokeList 1s ease-out infinite;
 }
