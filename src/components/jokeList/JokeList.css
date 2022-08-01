@@ -25,8 +25,14 @@
 
 @keyframes markeeJokes {
     0%{text-shadow: 0px 0px 5px #006fc9;}
-    50%{text-shadow: 0px 0px 19px #006fc9;}
+    50%{text-shadow: 0px 0px 19px #ab0ce4;-webkit-text-stroke-color: #ab0ce4;}
     100%{text-shadow: 0px 0px 5px #006fc9;}
+}
+
+@keyframes markeeIcon {
+    0%{font-size: 8.3em; -webkit-text-stroke-color: #006fc9;}
+    50%{font-size: 9.3em; -webkit-text-stroke-color: #ab0ce4; text-shadow: 0px 0px 19px #ab0ce4;}
+    100%{font-size: 8.3em; -webkit-text-stroke-color: #006fc9;}
 }
 
 @keyframes loaderA-JokeList {
@@ -94,6 +100,7 @@
     height: 190px;
     font-size: 8.3em;
     padding: 0px;
+    animation: markeeIcon 3s ease-out infinite;
 }
 
 .JokeList-Display{
