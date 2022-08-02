@@ -17,7 +17,7 @@
     100%{box-shadow: 0px 0px 5px #ffffff; text-shadow: 0px 0px 8px #ffffff;}
 }
 
-@keyframes addJokesBtnHover {
+@keyframes clearLocalStorageHover {
     0%{box-shadow: 0px 0px 5px #ffff00; text-shadow: 0px 0px 8px #ffff00;}
     50%{box-shadow: 0px 0px 10px #ffff00; text-shadow: 0px 0px 20px #ffff00;}
     100%{box-shadow: 0px 0px 5px #ffff00; text-shadow: 0px 0px 8px #ffff00;}
@@ -162,20 +162,6 @@
     transition: 1.5s;
 }
 
-.JokeList-Control-Btn-CLRWLS{
-    width: 100px;
-    height: 30px;
-    font-size: 9px;
-    background-color: transparent;
-    border-radius: 3px;
-    border: 3px solid #ffffff;
-    color: #ffffff;
-    box-shadow: 0px 0px 9px #ffffff;
-    text-shadow: 0px 0px 15px #ffffff;
-    animation: clearLocalStorageBtn 3s ease-out infinite;
-    transition: 1.5s;
-}
-
 .JokeList-Control-Btn:hover{
     border: 3px solid #ab0ce4;
     color: #ab0ce4;
@@ -189,7 +175,7 @@
 .JokeList-Control-Btn-CLRWLS{
     width: 100px;
     height: 30px;
-    font-size: 9px;
+    font-size: 12px;
     background-color: transparent;
     border-radius: 3px;
     border: 3px solid #ffffff;
@@ -207,7 +193,7 @@
     box-shadow: 0px 0px 9px #ffff00;
     /* box-shadow: inset 0px 0px 6px #ab0ce4; */
     text-shadow: 0px 0px 15px #ffff00;
-    animation: addJokesBtnHover 3s ease-out infinite;
+    animation: clearLocalStorageHover 3s ease-out infinite;
     transition: 1.5s;
 }
 
