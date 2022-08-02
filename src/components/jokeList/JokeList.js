@@ -25,6 +25,7 @@ class JokeList extends Component {
         this.initJokeList = this.initJokeList.bind(this);
         this.resetLocalStorageJokeValues = this.resetLocalStorageJokeValues.bind(this);
         this.handleAddMoreJokes = this.handleAddMoreJokes.bind(this);
+        this.resetJokes = this.resetJokes.bind(this);
     }
 
     async componentDidMount(){
@@ -204,16 +205,28 @@ class JokeList extends Component {
         return voteTotalStyle;
     }
 
-    clearLocalStorage(){
-        window.localStorage.clear();
+    async resetJokes(){
+        // window.localStorage.clear();
+        window.localStorage.setItem('jokes', '[]');
+        window.localStorage.setItem('currVote', '{}');
+
+        this.setState({jokes: [], currJoke: {}});
+
+        setTimeout(() => {
+            this.setState({isLoading: true},this.addMoreJokes);
+        }, 5000);
+        
     }
 
     generateLoader(){
         return(
             <div className='JokeList-Loader-Console'>
-                <div className='JokeList-Loader'>
-                    <div className='JokeList-LoaderB'></div>
+                <div className='JokeList-Loader-Container'>
+                    <div className='JokeList-Loader'>
+                        <div className='JokeList-LoaderB'></div>
+                    </div>
                 </div>
+                <div className='JokeList-Loader-Text'>Loading...</div>
             </div>
         );
     }
@@ -233,7 +246,8 @@ class JokeList extends Component {
                 </div>
                 <div className='JokeList-Control'>
                     <button className='JokeList-Control-Btn' onClick={this.handleAddMoreJokes}>Add Jokes</button>
-                    <button className='JokeList-Control-Btn-CLRWLS' onClick={this.clearLocalStorage}>Clear LocalStorage</button>
+                    {/* <button className='JokeList-Control-Btn-CLRWLS' onClick={this.resetJokes}>Clear LocalStorage</button> */}
+                    <button className='JokeList-Control-Btn-CLRWLS' onClick={this.resetJokes}>Reset Jokes</button>
                 </div>
             </div>
             <div className='JokeList-Display' id='JokeListDisplayPortal'>
