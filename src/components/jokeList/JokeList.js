@@ -17,6 +17,10 @@ class JokeList extends Component {
             currJoke: JSON.parse(window.localStorage.getItem('currJoke') || '{}'),
             isLoading: false
         };
+
+        this.jokesInUse = new Set(this.state.jokes.map(j => j.joke));
+        console.log(this.jokesInUse);
+
         this.getJokes = this.getJokes.bind(this);
         this.addMoreJokes = this.addMoreJokes.bind(this);
         this.generateUpVote = this.generateUpVote.bind(this);
@@ -60,46 +64,63 @@ class JokeList extends Component {
     }
 
     async getJokes(){
-        let jokeBatch = [];
 
-        console.log(`@getJokes this.props.initialJokeCount => ${this.props.initialJokeCount}`);
+        try {
 
-        while (jokeBatch.length < this.props.initialJokeCount) {
-            
-            let joke = {};
-            
-            let res = await axios.get(`${API_BASE_URL}`,{headers: {Accept: 'application/json'}});
-            // console.log(`res.data => ${JSON.stringify(res.data)}`);
+            let jokeBatch = [];
 
-            joke['id'] = uuidv4();
-            joke['joke'] = res.data.joke;
-            joke['upVotes'] = 0;
-            joke['downVotes'] = 0;
-            joke['voteTotal'] = 0;
-            joke['voteTotalStyle'] = `Joke-Vote-Total`;
-            joke['isCurrent'] = false;
+            // console.log(`@getJokes this.props.initialJokeCount => ${this.props.initialJokeCount}`);
 
-            // console.log(`joke => ${JSON.stringify(joke)}`);
+            while (jokeBatch.length < this.props.initialJokeCount) {
+                
+                let joke = {};
+                
+                let res = await axios.get(`${API_BASE_URL}`,{headers: {Accept: 'application/json'}});
+                // console.log(`res.data => ${JSON.stringify(res.data)}`);
 
-            let isIncluded = jokeBatch.includes(joke);
-            // console.log(`isIncluded => ${isIncluded}`);
+                joke['id'] = uuidv4();
+                joke['joke'] = res.data.joke;
+                joke['upVotes'] = 0;
+                joke['downVotes'] = 0;
+                joke['voteTotal'] = 0;
+                joke['voteTotalStyle'] = `Joke-Vote-Total`;
+                joke['isCurrent'] = false;
 
-            if(!isIncluded){
-                jokeBatch.push(joke);
+                // console.log(`joke => ${JSON.stringify(joke)}`);
+
+                let isInUse = this.jokesInUse.has(joke.joke);
+                // console.log(`isIncluded => ${isIncluded}`);
+
+                if(!isInUse){
+                    console.log(`NOT IN USE!!!`);
+                    console.log(`${joke.joke}`);
+                    jokeBatch.push(joke);
+                }else{
+                    console.log(`IN USE!!!`);
+                    console.log(`${joke.joke}`);
+                }
+
+                console.log(`@getJokes jokeBatch length => ${jokeBatch.length}`);
+                // console.log(`@getJokes jokeBatch => ${JSON.stringify(jokeBatch)}`);
+                
             }
 
-            console.log(`@getJokes jokeBatch length => ${jokeBatch.length}`);
-            console.log(`@getJokes jokeBatch => ${JSON.stringify(jokeBatch)}`);
+            return jokeBatch;
             
+        } catch (error) {
+            console.log(error);
+            this.setState({isLoading: false});
         }
 
-        return jokeBatch;
     }
 
     async addMoreJokes(){
         let additionalJokes = await this.getJokes();
         let newJokes = [...this.state.jokes, ...additionalJokes];
-        this.setState({jokes: newJokes, isLoading: false},() => window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes)));
+        this.setState({jokes: newJokes, isLoading: false},() => {
+            console.log(this.jokesInUse);
+            window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
+        });
     }
 
     async handleAddMoreJokes(){
@@ -164,19 +185,6 @@ class JokeList extends Component {
         }
 
         newJokes[newCurrIdx].isCurrent = true;
-
-        // console.log(`Pre @setCurrentJoke newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
-
-        // if(newJokes.includes(this.currJoke)){
-        //     newJokes[currIdx].isCurrent = false;
-        //     newJokes[newCurrIdx].isCurrent = true;
-        // }else{
-        //     newJokes[newCurrIdx].isCurrent = true;
-        // }
-        
-        
-
-        // console.log(`Post @setCurrentJoke newJokes[${idx}] => ${JSON.stringify(newJokes[idx])}`);
 
         this.setState({jokes: newJokes, currJoke: joke}, () => {
             window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes));
@@ -246,7 +254,6 @@ class JokeList extends Component {
                 </div>
                 <div className='JokeList-Control'>
                     <button className='JokeList-Control-Btn' onClick={this.handleAddMoreJokes}>Add Jokes</button>
-                    {/* <button className='JokeList-Control-Btn-CLRWLS' onClick={this.resetJokes}>Clear LocalStorage</button> */}
                     <button className='JokeList-Control-Btn-CLRWLS' onClick={this.resetJokes}>Reset Jokes</button>
                 </div>
             </div>
